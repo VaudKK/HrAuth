@@ -25,7 +25,7 @@
         primary_contact  VARCHAR(13) NOT NULL,
 
         password VARCHAR(50) NOT NULL,  
-        status_id REFERENCES status,   
+        status_id INTEGER REFERENCES status,   
                    
         created_at DATE not null default CURRENT_DATE,
         modified_at  DATE ,
@@ -41,9 +41,9 @@
 
 
         profile_id serial PRIMARY key,
-        user_id REFERENCES users,
+        user_id INTEGER REFERENCES users,
 
-        role_id REFERENCES roles NOT NULL,
+        role_id INTEGER REFERENCES roles NOT NULL,
 
 
     );
