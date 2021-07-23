@@ -8,7 +8,7 @@
         first_name VARCHAR(50) NOT NULL,
         last_name VARCHAR(50) NOT NULL,
         email VARCHAR(50) NOT NULL,
-        primary_contact  VARCHAR(13) NOT NUL,
+        primary_contact  VARCHAR(13) NOT NULL,
 
         password VARCHAR(50) NOT NULL,    
                    
@@ -38,3 +38,4 @@
 
 
     );
+    
