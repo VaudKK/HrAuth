@@ -14,7 +14,7 @@
 
     CREATE TABLE users(
 
-        user_id serial PRIMARY key,
+        user_id VARCHAR PRIMARY key,
 
         company_id VARCHAR(150) NOT null,
 
