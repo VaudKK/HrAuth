@@ -28,8 +28,8 @@
         status_id REFERENCES status,   
                    
         created_at DATE not null default CURRENT_DATE,
-        modified_at  DATE 
-        
+        modified_at  DATE ,
+        UNIQUE(email,company_id)
 
     );
     CREATE INDEX idx_users_id ON users(user_id);
