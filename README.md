@@ -1,0 +1,3 @@
+# HrAuth
+
+run dotnet restore
