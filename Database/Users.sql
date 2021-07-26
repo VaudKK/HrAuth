@@ -22,13 +22,12 @@
         first_name VARCHAR(50) NOT NULL,
         last_name VARCHAR(50) NOT NULL,
         email VARCHAR(50) NOT NULL,
-        primary_contact  VARCHAR(13) NOT NULL,
-
+       
         password VARCHAR(50) NOT NULL,  
         status_id INTEGER REFERENCES status,   
                    
-        created_at DATE not null default CURRENT_DATE,
-        modified_at  DATE ,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        modified_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         UNIQUE(email,company_id)
 
     );
@@ -44,6 +43,7 @@
         user_id INTEGER REFERENCES users,
 
         role_id INTEGER REFERENCES roles NOT NULL,
+ primary_contact  VARCHAR(13) NOT NULL,
 
 
     );
