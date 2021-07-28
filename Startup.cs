@@ -16,6 +16,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using HrAuth.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity;
 
 namespace HrAuth
 {
@@ -31,12 +35,35 @@ namespace HrAuth
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<UserRepository>();
-            services.AddTransient<IUserService,UserService>();
-
+            
             var settings = Configuration.GetSection(nameof(PostgreConfigurations)).Get<PostgreConfigurations>();
             services.AddDbContext<PostgreContext>(
                 options => options.UseNpgsql(settings.ConnectionString));
+
+            var jwtSettings = Configuration.GetSection(nameof(JwtConfiguration)).Get<JwtConfiguration>();
+
+            services.Configure<JwtConfiguration>(Configuration.GetSection(nameof(JwtConfiguration)));
+
+            services.AddAuthentication(options => {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(jwt => {
+                var secret = Encoding.ASCII.GetBytes(jwtSettings.Secret);
+                jwt.SaveToken = false;
+
+                jwt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(secret),
+                    ValidateIssuer = true,
+                    ValidateAudience = false,
+                    RequireExpirationTime = false,
+                    ValidateLifetime = true
+                };
+
+            });
 
             services.AddControllers(options =>{
                 options.SuppressAsyncSuffixInActionNames = false;
@@ -47,6 +74,9 @@ namespace HrAuth
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HrAuth", Version = "v1" });
             });
+
+            services.AddScoped<UserRepository>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +92,7 @@ namespace HrAuth
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

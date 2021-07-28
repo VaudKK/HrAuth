@@ -9,9 +9,10 @@ namespace HrAuth.Context
         public PostgreContext(DbContextOptions<PostgreContext> options): base(options){}
 
         protected override void OnModelCreating(ModelBuilder builder)  
-        {  
-            //Value Converters
+        {
+            base.OnModelCreating(builder);
 
+            //Value Converters
             builder
                 .Entity<User>()
                 .Property(e => e.UserId)
@@ -28,7 +29,7 @@ namespace HrAuth.Context
                 .HasConversion<long>();
         } 
         
-        public DbSet<User> Users { get; set; }
+        public DbSet<User> HrUsers { get; set; }
     }
 
 }

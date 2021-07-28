@@ -9,6 +9,9 @@ namespace HrAuth.Models{
         [Column("user_id")]
         public Guid UserId {get; init;}
 
+        //[Column("company_id")]
+        //public string CompanyId { get; set; }
+
         [Column("first_name")]
         public string FirstName {get;init;}
 

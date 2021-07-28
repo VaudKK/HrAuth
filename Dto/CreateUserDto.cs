@@ -10,6 +10,7 @@ namespace HrAuth.Dto{
         [Required]
         public string Password {get;init;}
         [Required]
+        [EmailAddress]
         public string Email {get;init;}
         public string PrimaryContact {get;init;}
 

@@ -5,9 +5,9 @@ namespace HrAuth.Service{
 
     public interface IUserService{
 
-        Task CreateUserAsync(CreateUserDto createUser);
+        Task<ResponseDto> CreateUserAsync(CreateUserDto createUser);
 
-        Task<bool> AuthenticateAsync(UserAuthDto userAuthDto);
+        Task<bool> AuthenticateAsync(LoginDto loginDto);
 
     }
 

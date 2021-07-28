@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HrAuth.Controllers{
 
     [ApiController]
-    [Route("auth")]
+    [Route("uaa")]
     public class AuthenticationController: Controller{
 
         private readonly IUserService userService;
@@ -16,9 +16,9 @@ namespace HrAuth.Controllers{
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateUserAsync(CreateUserDto createUserDto){           
-            await userService.CreateUserAsync(createUserDto);
-            return NoContent();
+        [Route("register")]
+        public async Task<ResponseDto> CreateUserAsync(CreateUserDto createUserDto){
+            return await userService.CreateUserAsync(createUserDto);
         }
         
     }
