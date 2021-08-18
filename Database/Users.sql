@@ -43,7 +43,7 @@
         user_id INTEGER REFERENCES users,
 
         role_id INTEGER REFERENCES roles NOT NULL,
- primary_contact  VARCHAR(13) NOT NULL,
+ primary_contact  VARCHAR(13) NOT NULL
 
 
     );
