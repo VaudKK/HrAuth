@@ -26,8 +26,10 @@
         password VARCHAR(50) NOT NULL,  
         status_id INTEGER REFERENCES status,   
                    
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        modified_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        created_at TIMESTAMP without time zone,
+        modified_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP without time zone,
+         primary_contact  VARCHAR(13) NOT NULL,
+
         UNIQUE(email,company_id)
 
     );
@@ -40,10 +42,9 @@
 
 
         profile_id serial PRIMARY key,
-        user_id INTEGER REFERENCES users,
+        user_id VARCHAR REFERENCES users,
 
-        role_id INTEGER REFERENCES roles NOT NULL,
- primary_contact  VARCHAR(13) NOT NULL
+        role_id INTEGER REFERENCES roles NOT NULL
 
 
     );
