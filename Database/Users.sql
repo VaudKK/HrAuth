@@ -26,8 +26,8 @@
         password VARCHAR(50) NOT NULL,  
         status_id INTEGER REFERENCES status,   
                    
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        modified_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+        modified_at  TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
         UNIQUE(email,company_id)
 
     );

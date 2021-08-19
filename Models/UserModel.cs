@@ -9,8 +9,8 @@ namespace HrAuth.Models{
         [Column("user_id")]
         public Guid UserId {get; init;}
 
-        //[Column("company_id")]
-        //public string CompanyId { get; set; }
+        [Column("company_id")]
+        public string CompanyId { get; set; }
 
         [Column("first_name")]
         public string FirstName {get;init;}
@@ -23,9 +23,6 @@ namespace HrAuth.Models{
 
         [Column("email")]
         public string Email {get;init;}
-
-        [Column("primary_contact")]
-        public string PrimaryContact {get;init;}
 
     }
 

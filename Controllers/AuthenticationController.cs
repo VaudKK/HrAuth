@@ -20,6 +20,12 @@ namespace HrAuth.Controllers{
         public async Task<ResponseDto> CreateUserAsync(CreateUserDto createUserDto){
             return await userService.CreateUserAsync(createUserDto);
         }
+
+        [HttpPost]
+        [Route("login")]
+        public async Task<ResponseDto> LogInAsync(LoginDto loginDto){
+            return await userService.AuthenticateAsync(loginDto);
+        }
         
     }
 

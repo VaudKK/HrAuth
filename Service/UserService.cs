@@ -28,9 +28,35 @@ namespace HrAuth.Service{
             this.jwtConfiguration = optionsMonitor.CurrentValue;
         }
         
-        public Task<bool> AuthenticateAsync(LoginDto loginDto)
+        public async Task<ResponseDto> AuthenticateAsync(LoginDto loginDto)
         {
-            throw new NotSupportedException();
+            var user = await userRepository.FindByEmail(loginDto.Email);
+
+            if(user != null){
+                if(loginDto.Password == user.Password){
+                    var token = generateToken(user);
+                    return new ResponseDto
+                    {
+                        success = true,
+                        token = token,
+                        errors = null
+                    };
+                }else{
+                    return new ResponseDto
+                    {
+                        success = false,
+                        token = null,
+                        errors = new List<String>{"Invalid username or password"}
+                    };;
+                }
+            }
+
+            return new ResponseDto
+            {
+                success = false,
+                token = null,
+                errors = new List<String>{"Invalid username or password"}
+            };;
         }
 
         public async Task<ResponseDto> CreateUserAsync(CreateUserDto createUser)
@@ -54,7 +80,9 @@ namespace HrAuth.Service{
                 LastName = createUser.LastName,
                 Email = createUser.Email,
                 Password = createUser.Password, //TODO: Encrypt user password
-                PrimaryContact = createUser.PrimaryContact
+                CompanyId = "0",
+                CreatedAt = DateTime.UtcNow,
+                ModifiedAt = DateTime.UtcNow
             };
 
             var saved = await userRepository.SaveAsync(user);

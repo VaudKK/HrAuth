@@ -7,7 +7,7 @@ namespace HrAuth.Service{
 
         Task<ResponseDto> CreateUserAsync(CreateUserDto createUser);
 
-        Task<bool> AuthenticateAsync(LoginDto loginDto);
+        Task<ResponseDto> AuthenticateAsync(LoginDto loginDto);
 
     }
 

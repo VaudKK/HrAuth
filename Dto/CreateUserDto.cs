@@ -12,7 +12,6 @@ namespace HrAuth.Dto{
         [Required]
         [EmailAddress]
         public string Email {get;init;}
-        public string PrimaryContact {get;init;}
 
     }
 
