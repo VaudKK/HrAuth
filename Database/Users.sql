@@ -26,10 +26,8 @@
         password VARCHAR(50) NOT NULL,  
         status_id INTEGER REFERENCES status,   
                    
-        created_at TIMESTAMP without time zone,
-        modified_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP without time zone,
-         primary_contact  VARCHAR(13) NOT NULL,
-
+        created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+        modified_at  TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
         UNIQUE(email,company_id)
 
     );

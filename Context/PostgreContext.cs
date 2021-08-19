@@ -17,16 +17,6 @@ namespace HrAuth.Context
                 .Entity<User>()
                 .Property(e => e.UserId)
                 .HasConversion<string>();
-
-            builder
-                .Entity<User>()
-                .Property(e => e.CreatedAt)
-                .HasConversion<long>();
-
-             builder
-                .Entity<User>()
-                .Property(e => e.ModifiedAt)
-                .HasConversion<long>();
         } 
         
         public DbSet<User> HrUsers { get; set; }
