@@ -1,9 +1,10 @@
 CREATE TABLE org(
-    org_id serial PRIMARY key,
+    org_id VARCHAR(255) PRIMARY key,
     org_name VARCHAR(100) NOT NULL,
-    org_email VARCHAR(100) NOT NULL,
+    org_email VARCHAR(100) UNIQUE NOT NULL,
     org_address VARCHAR(100) NOT NULL,
-    org_primary_contract VARCHAR(100) NOT NULL,
-    org_creater VARCHAR(100) REFERENCES users,
-    org_createion_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    org_primary_contact VARCHAR(100) NOT NULL,
+    org_creator VARCHAR(100) REFERENCES users,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+	modified_at  TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
