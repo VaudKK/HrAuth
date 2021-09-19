@@ -40,10 +40,9 @@
 
 
         profile_id serial PRIMARY key,
-        user_id INTEGER REFERENCES users,
+        user_id VARCHAR REFERENCES users,
 
-        role_id INTEGER REFERENCES roles NOT NULL,
- primary_contact  VARCHAR(13) NOT NULL
+        role_id INTEGER REFERENCES roles NOT NULL
 
 
     );
